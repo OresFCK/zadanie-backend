@@ -37,6 +37,7 @@ class PdfController extends AbstractController
         if (!$person || !$textEntry) {
             return new Response('Person or Text Entry not found', 404);
         }
+        $wordCount = str_word_count(strip_tags($textEntry->getContent()));
 
         $htmlContent = $this->twig->render('./pdf/generate_pdf.html.twig', [
             'person' => [
@@ -46,6 +47,7 @@ class PdfController extends AbstractController
             ],
             'textEntry' => [
                 'content' => $textEntry->getContent(),
+                'wordCount' => $wordCount,
             ],
         ]);
 
