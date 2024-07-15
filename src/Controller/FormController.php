@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Person;
 use App\Entity\PersonalInfo;
 use App\Entity\TextEntry;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,9 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FormController extends AbstractController
 {
-    /**
-     * @Route("/api/person", name="create_person", methods={"POST"})
-     */
+    #[Route('/api/person', methods: ['POST', 'HEAD'])]
     public function createPerson(Request $request, EntityManagerInterface $em): Response
     {
         $data = json_decode($request->getContent(), true);
@@ -32,9 +29,7 @@ class FormController extends AbstractController
         return new Response('Person created', 201);
     }
 
-    /**
-     * @Route("/api/text-entry", name="create_text_entry", methods={"POST"})
-     */
+    #[Route('/api/text-entry', methods: ['POST', 'HEAD'])]
     public function createTextEntry(Request $request, EntityManagerInterface $em): Response
     {
         $data = json_decode($request->getContent(), true);
